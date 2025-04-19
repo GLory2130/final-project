@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutri Connect</title>
+    <link href="D:\project\bootstrap-5.3.3-dist\bootstrap-5.3.3-dist\css\bootstrap.min.css" rel="stylesheet">
+    <link href="D:\project\css\style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Navbar Styling */
+        .navbar-nav .nav-link {
+            transition: color 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover {
+            color: green !important;
+        }
+        .navbar-nav .nav-link.active {
+            font-weight: bold;
+            color: green !important;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            padding: 100px 20px;
+            border-radius: 8px;
+        }
+        .hero-section h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .hero-section p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        .hero-section .btn-primary {
+            background-color: green !important;
+            border-color: green !important;
+        }
+        .hero-section .btn-primary:hover {
+            background-color: darkgreen !important;
+        }
+
+        /* Cards Section */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+        }
+        footer .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        footer .social-icons a:hover {
+            color: green;
+        }
+
+        /* Rotating Logo Animation */
+        .rotating-logo {
+            animation: rotate 5s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <!-- Rotating Logo -->
+            <a class="navbar-brand d-flex align-items-center" href="home.html">
+                <img src="D:\project\images\logo.png" alt="Nutri Connect Logo" class="rotating-logo" style="width: 100px; height: 60px; margin-right: 10px;">
+                <span>Nutri Connect</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="home.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-utensils"></i> Food Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="chatbot.html"><i class="fas fa-comments"></i> Start Chat</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin-panel.html"><i class="fas fa-user-shield"></i> Admin</a></li>
+                    <li class="nav-item"><a class="nav-link" href="register.html"><i class="fas fa-user-plus"></i> Register</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section text-center">
+        <h1>Your Personal <span class="highlight">Nutrition</span> Consultant</h1>
+        <p>Discover the perfect balance of nutrition with personalized guidance tailored just for you.</p>
+        <div class="mt-4">
+            <button class="btn btn-primary">Start Chatting <i class="fas fa-arrow-right"></i></button>
+            <button class="btn btn-outline-light"><a href="index.html" class="text-white text-decoration-none">Explore Food Types</a></button>
+        </div>
+    </div>
+
+    <!-- Cards Section -->
+    <div style="background: linear-gradient(to right, #6a11cb, #2575fc); color: white; padding: 50px 0;">
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="chatbot.html" class="text-decoration-none">
+                        <div class="card shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-robot fa-3x mb-3 text-primary"></i>
+                                <h5 class="card-title">Chatbot</h5>
+                                <p class="card-text">Get instant answers to your nutrition-related questions with our AI-powered chatbot.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="index.html" class="text-decoration-none">
+                        <div class="card shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-utensils fa-3x mb-3 text-success"></i>
+                                <h5 class="card-title">Food Gallery</h5>
+                                <p class="card-text">Explore a variety of food types and their nutritional values in our interactive gallery.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="admin-panel.html" class="text-decoration-none">
+                        <div class="card shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-tools fa-3x mb-3 text-warning"></i>
+                                <h5 class="card-title">Admin Panel</h5>
+                                <p class="card-text">Manage and customize the system with our easy-to-use admin panel.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Section -->
+    <div class="container my-5" >
+        <div class="row text-center statistics-section">
+            <div class="col-md-3">
+                <div class="stat-item">
+                    <i class="fas fa-users fa-3x mb-3 text-primary"></i>
+                    <h2 class="counter">10,000+</h2>
+                    <p>Active Users</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-item">
+                    <i class="fas fa-utensils fa-3x mb-3 text-success"></i>
+                    <h2 class="counter">5,000+</h2>
+                    <p>Food Items</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-item">
+                    <i class="fas fa-comments fa-3x mb-3 text-warning"></i>
+                    <h2 class="counter">50,000+</h2>
+                    <p>Chat Sessions</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-item">
+                    <i class="fas fa-star fa-3x mb-3 text-danger"></i>
+                    <h2 class="counter">4.8</h2>
+                    <p>User Rating</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="container my-5">
+        <h2 class="text-center mb-5">Why Choose Nutri Connect?</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI-Powered Insights</h3>
+                    <p>Get personalized nutrition advice powered by advanced artificial intelligence.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Progress Tracking</h3>
+                    <p>Monitor your nutrition journey with detailed analytics and progress reports.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Access your nutrition information anytime, anywhere on any device.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div class="testimonials-section py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">What Our Users Say</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <i class="fas fa-quote-left"></i>
+                            <p>"Nutri Connect has completely transformed my approach to nutrition. The AI chatbot is incredibly helpful!"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://via.placeholder.com/50" alt="User" class="rounded-circle">
+                            <div>
+                                <h5>Sarah Johnson</h5>
+                                <p>Fitness Enthusiast</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <i class="fas fa-quote-left"></i>
+                            <p>"The food gallery is amazing! It helped me discover new healthy recipes and understand nutritional values better."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://via.placeholder.com/50" alt="User" class="rounded-circle">
+                            <div>
+                                <h5>Michael Chen</h5>
+                                <p>Health Coach</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <i class="fas fa-quote-left"></i>
+                            <p>"As a busy professional, having instant access to nutrition advice has been a game-changer for my health journey."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://via.placeholder.com/50" alt="User" class="rounded-circle">
+                            <div>
+                                <h5>Emily Rodriguez</h5>
+                                <p>Business Executive</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <div class="newsletter-section py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <h2>Stay Updated with Nutrition Tips</h2>
+                    <p>Subscribe to our newsletter for the latest nutrition advice and healthy recipes.</p>
+                    <form class="newsletter-form">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Enter your email" required>
+                            <button class="btn btn-primary" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <p>Contact Us</p>
+            <p>Email: support@nutriconnect.com | Phone: +1 234 567 890</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2025 Nutri Connect. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="D:\project\bootstrap-5.3.3-dist\bootstrap-5.3.3-dist\js\bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animate statistics on scroll
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.stat-item').forEach((item) => {
+            observer.observe(item);
+        });
+
+        // Add loading animation to buttons
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (!this.classList.contains('btn-outline-light')) {
+                    e.preventDefault();
+                    this.classList.add('loading');
+                    setTimeout(() => {
+                        this.classList.remove('loading');
+                    }, 1000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
