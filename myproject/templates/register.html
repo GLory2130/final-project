@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Nutri Connect</title>
+    <link href="{% static 'myapp/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'myapp/css/style.css' %}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        .register-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            color: black; /* Set text color to black for visibility */
+        }
+        .btn-primary {
+            background-color: green !important;
+            border-color: green !important;
+        }
+        .btn-primary:hover {
+            background-color: darkgreen !important;
+        }
+        html, body {
+            height: 100%;
+            background: linear-gradient(to right, #6a11cb, #2575fc); /* Same background as home.html */
+            color: white; /* Ensure text is readable outside the container */
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="{%static 'myapp/images/logo.png' %}" alt="Nutri Connect Logo" class="rotating-logo" style="width: 100px; height: 60px; margin-right: 10px;">
+                <span>Nutri Connect</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{%url 'home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{%url 'login' %}">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="register-container">
+        <h2 class="text-center mb-4">Register</h2>
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter your Username" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary w-100">Register</button>
+        </form>
+        <p class="text-center mt-3">
+            Already have an account? <a href="login.html" class="text-success">Login here</a>.
+        </p>
+    </div>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2025 Nutri Connect. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{%static 'myapp/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
