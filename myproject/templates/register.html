@@ -63,8 +63,9 @@
     </nav>
 
     <div class="register-container">
+        {% include 'message.html' %}
         <h2 class="text-center mb-4">Register</h2>
-        <form action="{% url 'login' %}" method="POST">
+        <form action="{% url 'register' %}" method="POST">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="name" class="form-label">Username</label>
@@ -82,7 +83,7 @@
             <button type="submit" class="btn btn-primary w-100">Register</button>
         </form>
         <p class="text-center mt-3">
-            Already have an account? <a href="login.html" class="text-success">Login here</a>.
+            Already have an account? <a href="{%url 'login' %}" class="text-success">Login here</a>.
         </p>
     </div>
 

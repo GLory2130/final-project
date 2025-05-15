@@ -3,31 +3,31 @@
 {% block title %} Nutri Connect {% endblock %}
 {% block content %}
 <body>
-    <!-- Introduction Section -->
+    
     <div class="container my-5">
         <div class="intro-section text-center">
             <h1 class="display-4 mb-4">Welcome to Our Food Gallery</h1>
             <p class="lead mb-4">Explore our comprehensive collection of nutritious food categories. Each section provides detailed information about the nutritional benefits, health impacts, and recommended consumption guidelines. Whether you're looking to improve your diet, manage a specific health condition, or simply learn more about nutrition, our food gallery offers valuable insights to help you make informed dietary choices.</p>
             <div class="intro-buttons">
                 <a href="chatbot.html" class="btn btn-success btn-lg me-3"><i class="fas fa-comments"></i> Start Nutrition Chat</a>
-                <a href="home.html" class="btn btn-outline-primary btn-lg"><i class="fas fa-home"></i> Return to Home</a>
+                <a href="{% url 'home' %}" class="btn btn-outline-primary btn-lg"><i class="fas fa-home"></i> Return to Home</a>
             </div>
         </div>
     </div>
-    <div class="search-wrapper">
-        <div class="search-box">
-          <input type="text" id="searchInput" placeholder="Enter food name...">
-          <button onclick="searchFood()">
-            <i class="fas fa-search"></i> Search
-          </button>
-        </div>
-      </div>
-      
-    <!-- Main Section -->
+    <div class="mb-4">
+    <input type="text" id="searchInput" placeholder="Search..." class="form-control" />
+    <button onclick="searchFood()" class="btn btn-primary mt-2">Search</button>
+</div>
+
+
+       
+    
     <main class="container my-5">
+         <div id="food-results" class="row row-cols-1 row-cols-md-3 g-4 mb-4"></div>
+
         <!-- First Row -->
-        <div class="row row-cols-1 row-cols-md-3 g-4 mb-4"> <!-- Added mb-4 for spacing -->
-            <!-- Food Item 1 -->
+        <div class="row row-cols-1 row-cols-md-3 g-4 mb-4"> 
+            
             <div class="col">
                 <div class="card h-100" id="card-fruits">
                     <img src="{% static 'myapp/images/imgb 2.jpg' %}" class="card-img-top" alt="Fruits">
@@ -43,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Food Item 2 -->
+          
             <div class="col">
                 <div class="card h-100" id="card-vegetables">
                     <img src="{%static 'myapp/images/imgb 2.jpg' %}"class="card-img-top" alt="Vegetables">
@@ -59,7 +59,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Food Item 3 -->
+            
             <div class="col">
                 <div class="card h-100" id="card-nuts">
                     <img src="{%static 'myapp/images/imgb 2.jpg' %}" class="card-img-top" alt="Nuts">
@@ -76,10 +76,9 @@
                 </div>
             </div>
         </div>
-
+       
         <!-- Second Row -->
-        <div class="row row-cols-1 row-cols-md-3 g-4 mb-4"> <!-- Added mb-4 for spacing -->
-            <!-- Food Item 4 -->
+        <div class="row row-cols-1 row-cols-md-3 g-4 mb-4"> 
             <div class="col">
                 <div class="card h-100" id="card-dairy">
                     <img src="{%static 'myapp/images/imgb 2.jpg' %}" class="card-img-top" alt="Dairy">
@@ -95,7 +94,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Food Item 5 -->
+            
             <div class="col">
                 <div class="card h-100" id="card-grains">
                     <img src="{%static 'myapp/images/imgb 2.jpg' %}" class="card-img-top" alt="Grains">
@@ -111,7 +110,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Food Item 6 -->
+            
             <div class="col">
                 <div class="card h-100" id="card-meat">
                     <img src="{%static 'myapp/images/imgb 2.jpg' %}" class="card-img-top" alt="Meat">
@@ -130,8 +129,8 @@
         </div>
 
         <!-- Third Row -->
-        <div class="row row-cols-1 row-cols-md-3 g-4"> <!-- No mb-4 for the last row -->
-            <!-- Food Item 7 -->
+        <div class="row row-cols-1 row-cols-md-3 g-4"> 
+          
             <div class="col">
                 <div class="card h-100" id="card-seafood">
                     <img src="{%static 'myapp/images/imgb 2.jpg' %}" class="card-img-top" alt="Seafood">
@@ -147,7 +146,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Food Item 8 -->
+           
             <div class="col">
                 <div class="card h-100" id="card-legumes">
                     <img src="{%static 'myapp/images/imgb 2.jpg' %}" class="card-img-top" alt="Legumes">
@@ -163,7 +162,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Food Item 9 -->
+           
             <div class="col">
                 <div class="card h-100" id="card-eggs">
                     <img src="{%static 'myapp/images/imgb 2.jpg' %}" class="card-img-top" alt="Eggs">
@@ -176,16 +175,15 @@
                         <div class="collapse mt-3" id="collapse-eggs">
                             <p class="card-text">Eggs are nutrient-dense and provide high-quality protein, vitamin D, and choline for brain health.</p>
                         </div>
+                        
                     </div>
                 </div>
+
+
             </div>
         </div>
     </main>
 
-    
-  
-
-    <!-- Bootstrap JS Bundle -->
     <script src="{% static 'myapp/js/bootstrap.bundle.min.js' %}"></script>
     <script>
         // Add/remove the "expanded" class to animate the card when the collapse is toggled
@@ -207,35 +205,54 @@
                 navbar.classList.remove('scrolled');
             }
         });
-        function searchFood() {
-            const query = document.getElementById('searchInput').value;
 
-            fetch(`/search_food/?query=${query}`)
-                .then(response => response.json())
-                .then(data => {
-                    const resultsDiv = document.getElementById('results');
-                    resultsDiv.innerHTML = '';
+function searchFood() {
+    const query = document.getElementById('searchInput').value.trim();
 
-                    const hits = data.hits || [];
+    if (!query) {
+        alert("Please enter a food name.");
+        return;
+    }
 
-                    if (hits.length === 0) {
-                        resultsDiv.innerHTML = '<p>No results found.</p>';
-                        return;
-                    }
+    fetch(`/search_food/?query=${encodeURIComponent(query)}`)
+        .then(res => res.json())
+        .then(data => {
+            const container = document.getElementById("food-results");
+            container.innerHTML = "";
 
-                    hits.forEach(item => {
-                        const recipe = item.recipe;
-                        const card = document.createElement('div');
-                        card.className = 'card';
-                        card.innerHTML = `
-                            <h3>${recipe.label}</h3>
-                            <img src="${recipe.image}" width="100" />
-                            <p><a href="${recipe.url}" target="_blank">View Recipe</a></p>
-                        `;
-                        resultsDiv.appendChild(card);
-                    });
-                });
-        }
-    </script>
+            if (!data.foods || data.foods.length === 0) {
+                container.innerHTML = "<p>No food found.</p>";
+                return;
+            }
+
+            data.foods.forEach((food, index) => {
+                const uniqueId = `collapse-${index}`; 
+                const card = document.createElement("div");
+                card.className = "col-md-4 mb-3";
+                card.innerHTML = `
+                    <div class="card h-100">
+                        <img src="${food.image}" class="card-img-top" alt="${food.name}">
+                        <div class="card-body">
+                            <h5 class="card-title">${food.name}</h5>
+                            <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#${uniqueId}" aria-expanded="false" aria-controls="${uniqueId}">
+                                Read More
+                            </button>
+                            <div class="collapse mt-3" id="${uniqueId}">
+                                <p class="card-text">${food.importance}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        })
+        .catch(error => {
+            console.error("Error fetching food data:", error);
+            document.getElementById("food-results").innerHTML = "<p>Something went wrong. Try again.</p>";
+        });
+}
+
+</script>
 </body>
 {% endblock %}
+</html>

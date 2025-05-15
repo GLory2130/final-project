@@ -6,12 +6,33 @@ import requests
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.models import User
+import openai
+from .models import Food
+
+def generate_description(food_name):
+    # Example implementation of the function
+    return f"The food '{food_name}' is delicious and nutritious."
+
+
+openai.api_key = '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'
+
 
 
 def base(request):
     return render(request,'base.html')
 
 def index(request):
+    if request.method == 'POST':
+        food_name = request.POST.get('food_name', '').strip()
+        if food_name:
+            description = generate_description(food_name)
+            return render(request, 'index.html', {'description': description})
+        else:
+            messages.error(request, "Please enter a food name.")
+            return redirect('index')
+    else:
+        # Handle GET request or other logic here
+        pass
     return render(request, 'index.html')
 
 def home(request):
@@ -52,23 +73,22 @@ def user_login(request):
     return render(request, 'login.html')
 
 
+
 def search_food(request):
-    query = request.GET.get('query', '')
+    query = request.GET.get("query", "").strip().lower()
+    print(f"Search query: {query}")  # Debugging: Log the query
     if not query:
-        return JsonResponse({'error': 'No query provided'}, status=400)
+        return JsonResponse({"error": "No query provided."}, status=400)
 
-    url = "https://api.edamam.com/api/recipes/v2"
-    params = {
-        'type': 'public',
-        'q': query,
-        'app_id': '53938627',
-        'app_key': '0e18bd84353f5704d35a0079a2eb3fc4'
-    }
+    results = Food.objects.filter(name__icontains=query)
 
-    try:
-        response = requests.get(url, params=params)
-        response.raise_for_status()
-        data = response.json()
-        return JsonResponse(data, safe=False)
-    except requests.exceptions.RequestException as e:
-        return JsonResponse({'error': str(e)}, status=500)
+    foods = []
+    for food in results:
+        foods.append({
+            "id": food.id,
+            "name": food.name,
+            "image": food.image.url,
+            "importance": food.importance,
+        })
+
+    return JsonResponse({"foods": foods})
