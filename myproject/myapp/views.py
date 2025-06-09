@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 import openai
 from .models import Food
 
+# CHATBOT_API_URL = "http://127.0.0.1:8001/chat/"  
+
 def generate_description(food_name):
     # Example implementation of the function
     return f"The food '{food_name}' is delicious and nutritious."
@@ -92,3 +94,9 @@ def search_food(request):
         })
 
     return JsonResponse({"foods": foods})
+
+from django.views.decorators.csrf import ensure_csrf_cookie
+
+@ensure_csrf_cookie
+def chatbot_view(request):
+    return render(request, 'chat.html')

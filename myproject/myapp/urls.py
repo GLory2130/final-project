@@ -8,5 +8,6 @@ urlpatterns = [
     path('home/', views.index, name='index'),
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),
+    path('chat/', views.chatbot_view, name='chat'),
     re_path(r'^search_food/$', views.search_food, name='search_food_query'),
 ]
