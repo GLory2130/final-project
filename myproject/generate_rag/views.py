@@ -12,7 +12,7 @@ def welcome_view(request):
     return Response({
         "message": "Welcome to Afya RAG API",
         "endpoints": {
-            "rag": "/afya/rag/",
+            "rag": "/myproject/rag/",
         }
     }, status=status.HTTP_200_OK)
 

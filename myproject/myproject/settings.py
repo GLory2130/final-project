@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp.apps.MyappConfig', 
     'rest_framework',
-    'corsheaders',
+    # 'corsheaders',
     'machine_learning',
     'generate_rag',
     
