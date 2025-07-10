@@ -15,32 +15,41 @@
 <body>
     <!-- Navbar -->
   
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-        <div class="container">
-            <!-- Rotating Logo -->
-            <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
-                <img src="{% static 'myapp/images/logo.png' %}" alt="Nutri Connect Logo" class="rotating-logo" style="width: 100px; height: 60px; margin-right: 10px;">
-                <span>Nutri Connect</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}"><i class="fas fa-utensils"></i> Food Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'chat' %}"><i class="fas fa-comments"></i> Start Chat</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'register' %}"><i class="fas fa-user-plus"></i> Register</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a></li>
-                </ul>
-            </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'home' %}">Nutri Connect</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">Food Gallery</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'chat' %}">Chatbot</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}">Register</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+              </li>
+            {% endif %}
+          </ul>
         </div>
+      </div>
     </nav>
-
-    {% block content %}{% endblock %}
-
+ <div class="content-wrapper">
+        {% block content %}{% endblock %}
+    </div>
     <!-- Footer -->
-    <footer>
+    <footer >
         <div class="container">
             <p>Contact Us</p>
             <p>Email: support@nutriconnect.com | Phone: +1 234 567 890</p>

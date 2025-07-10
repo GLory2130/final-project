@@ -1,6 +1,8 @@
 body {
     background: linear-gradient(to right, #e3f2fd, rgb(36, 156, 36));
     scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
 }
 .rotating-logo {
     animation: rotate 5s linear infinite;
@@ -228,6 +230,8 @@ footer {
     background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
     padding: 3rem 0;
     margin-top: 4rem;
+    flex-shrink: 0;
+
 }
 
 footer .social-icons a {
@@ -790,6 +794,7 @@ footer {
     background: linear-gradient(to right, #1a1a1a, #2d2d2d);
     color: #fff;
     text-align: center;
+    flex-shrink: 0;
     padding: 1.5rem 0;
     margin-top: 3rem;
     box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
@@ -846,3 +851,6 @@ footer {
     padding: 10px; /* Add padding for better spacing */
     border-radius: 10px; /* Rounded corners for expanded content */
 }
+.content-wrapper {
+            flex: 1 0 auto;
+        }

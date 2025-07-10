@@ -31,7 +31,7 @@ def welcome_view(request):
 
 @csrf_exempt
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([AllowAny])  # Change to [IsAuthenticated] if you want only logged-in users to chat
 def machine_learning_view(request):
     try:
         # Get the message from the request
@@ -45,15 +45,21 @@ def machine_learning_view(request):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        # Get or create session ID from the request session
-        if 'session_id' not in request.session:
-            request.session['session_id'] = str(uuid.uuid4())
-        session_id = request.session['session_id']
+        # Use the logged-in user's ID or username if authenticated
+        if request.user.is_authenticated:
+            user_id = str(request.user.id)  # or request.user.username
+        else:
+            # Fallback to session ID for anonymous users
+            if 'session_id' not in request.session:
+                request.session['session_id'] = str(uuid.uuid4())
+            user_id = request.session['session_id']
+
+        conversation_id = user_id  # You can use a different conversation_id if you want multiple threads per user
 
         # Configure the chatbot
         config = {
-            "user_id": session_id,
-            "conversation_id": session_id,
+            "user_id": user_id,
+            "conversation_id": conversation_id,
             "knowledge_base": ""  # You can add knowledge base content here if needed
         }
 

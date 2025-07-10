@@ -89,8 +89,8 @@ def load_knowledge_base_content(document_path: str, max_chars=2000) -> str:
         logging.error(f"Error loading knowledge base: {str(e)}")
         return ""
 
-def get_chat_prompt(knowledge_base_content: str):
-    return ChatPromptTemplate.from_messages([
+def get_chat_prompt(knowledge_base_content: str, username: str = None):
+    system_messages = [
         (
             "system",
             "You are NutriChat, a friendly virtual health assistant. You help users build balanced diets and prevent conditions like obesity and diabetes. Keep responses concise (under 200 words), respond in English unless asked to use Kiswahili, and personalize suggestions based on user info and food intake history."
@@ -123,6 +123,11 @@ def get_chat_prompt(knowledge_base_content: str):
             "system",
             f"Use this knowledge base to guide your answers: {knowledge_base_content}"
         ),
-        MessagesPlaceholder(variable_name="history"),
-        ("human", "{question}"),
-    ]) 
+    ]
+    if username:
+        system_messages.append(
+            ("system", f"The current user's username is: {username}")
+        )
+    system_messages.append(MessagesPlaceholder(variable_name="history"))
+    system_messages.append(("human", "{question}"))
+    return ChatPromptTemplate.from_messages(system_messages)

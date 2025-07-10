@@ -3,13 +3,14 @@ from django.http import HttpResponse
 from django.template import loader
 from django.http import JsonResponse
 import requests
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 import openai
 from .models import Food
+import re
 
-# CHATBOT_API_URL = "http://127.0.0.1:8001/chat/"  
+
 
 def generate_description(food_name):
     # Example implementation of the function
@@ -40,6 +41,15 @@ def index(request):
 def home(request):
     return render(request, 'home.html')
 
+def is_strong_password(password):
+    if (len(password) < 8 or
+        not re.search(r'[A-Z]', password) or
+        not re.search(r'[a-z]', password) or
+        not re.search(r'\d', password) or
+        not re.search(r'[!@#$%^&*(),.?":{}|<>]', password)):
+        return False
+    return True
+
 def register(request):
     if request.method == 'POST':
         username = request.POST.get('username', '').strip()
@@ -50,8 +60,16 @@ def register(request):
             messages.error(request, "All fields are required.")
             return redirect('register')
 
+        if not is_strong_password(password):
+            messages.error(request, "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.")
+            return redirect('register')
+
         if User.objects.filter(username=username).exists():
             messages.error(request, "Username already exists.")
+            return redirect('register')
+
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "Email already exists.")
             return redirect('register')
 
         user = User.objects.create_user(username=username, password=password)
@@ -74,6 +92,11 @@ def user_login(request):
             return redirect('login')
     return render(request, 'login.html')
 
+
+def user_logout(request):
+    logout(request)
+    messages.success(request, "You have been logged out.")
+    return redirect('login')
 
 
 def search_food(request):
@@ -100,3 +123,9 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 @ensure_csrf_cookie
 def chatbot_view(request):
     return render(request, 'chat.html')
+
+def logout_confirm(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('login')
+    return render(request, 'logout.html')

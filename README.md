@@ -56,5 +56,5 @@ DEBUG=True
 DEEPINFRA_API_KEY="your-deepinfrs-api-key"
 DEEPINFRA_API_TOKEN="your-deepinfra-token"
 DEEPINFRA_LANG_MODEL="your-llama-model"
-PORT=8001
+PORT=8000
 ```
