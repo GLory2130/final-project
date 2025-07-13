@@ -109,7 +109,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* Enhanced Navbar */
+
 .navbar {
     padding: 15px 0;
     transition: all 0.3s ease;
@@ -151,7 +151,7 @@ body {
     padding: 50px 0; /* Replace height with padding for better spacing */
     background: linear-gradient(45deg, rgba(106, 17, 203, 0.9), rgba(37, 117, 252, 0.9));
 }
-/* Search box container */
+
 .search-box {
     background: white;
     padding: 30px 40px;
@@ -161,23 +161,23 @@ body {
     align-items: center;
 }
 
-/* Input Field */
+
 #searchInput {
     padding: 15px 20px;
     font-size: 18px;
     border: 2px solid #4CAF50;
     border-radius: 10px 0 0 10px;
     outline: none;
-    width: 400px; /* Increased width for a wider search box */
+    width: 400px; 
     transition: border-color 0.3s;
 }
 
-/* When clicking input */
+
 #searchInput:focus {
     border-color: #45a049;
 }
 
-/* Search Button */
+
 button {
     padding: 15px 25px;
     font-size: 18px;
@@ -192,19 +192,16 @@ button {
     gap: 8px;
 }
 
-/* Hover effects */
 button:hover {
     background-color: #45a049;
     transform: scale(1.05);
 }
 
-/* Search Icon */
+
 button i {
     font-size: 18px;
 }
 
-
-/* Enhanced Cards Section */
 .card {
     border: none;
     border-radius: 15px;
@@ -225,7 +222,7 @@ button i {
     font-size: 2.5rem;
 }
 
-/* Enhanced Footer */
+
 footer {
     background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
     padding: 3rem 0;
@@ -251,7 +248,7 @@ footer .social-icons a:hover {
     transform: translateY(-3px);
 }
 
-/* Statistics Section */
+
 .statistics-section {
     background: white;
     padding: 40px 0;
@@ -275,7 +272,7 @@ footer .social-icons a:hover {
     margin: 10px 0;
 }
 
-/* Features Section */
+
 .feature-card {
     background: white;
     padding: 30px;
@@ -306,7 +303,6 @@ footer .social-icons a:hover {
     color: white;
 }
 
-/* Testimonials Section */
 .testimonials-section {
     background: linear-gradient(45deg, #6a11cb, #2575fc);
     color: white;
@@ -342,7 +338,6 @@ footer .social-icons a:hover {
     object-fit: cover;
 }
 
-/* Newsletter Section */
 .newsletter-section {
     background: #f8f9fa;
 }
@@ -358,7 +353,6 @@ footer .social-icons a:hover {
     padding: 12px 30px;
 }
 
-/* Animation Classes */
 .animate {
     animation: fadeInUp 0.6s ease forwards;
 }
@@ -374,7 +368,6 @@ footer .social-icons a:hover {
     }
 }
 
-/* Loading Button Effect */
 .btn.loading {
     position: relative;
     pointer-events: none;
@@ -401,7 +394,6 @@ footer .social-icons a:hover {
     }
 }
 
-/* Enhanced Card Hover Effects */
 .card {
     transition: all 0.3s ease;
 }
@@ -415,7 +407,6 @@ footer .social-icons a:hover {
     transform: scale(1.1);
 }
 
-/* Statistics Animation */
 .stat-item {
     opacity: 0;
     transform: translateY(20px);
@@ -436,7 +427,6 @@ footer .social-icons a:hover {
     color: #2575fc;
 }
 
-/* Testimonial Card Enhancement */
 .testimonial-card {
     transition: all 0.3s ease;
 }
@@ -454,7 +444,6 @@ footer .social-icons a:hover {
     transform: scale(1.1);
 }
 
-/* Newsletter Form Enhancement */
 .newsletter-form .form-control:focus {
     box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
     border-color: #28a745;
@@ -483,7 +472,6 @@ footer .social-icons a:hover {
     height: 300px;
 }
 
-/* Responsive Adjustments */
 @media (max-width: 768px) {
     .stat-item {
         margin-bottom: 30px;
@@ -498,7 +486,6 @@ footer .social-icons a:hover {
     }
 }
 
-/* Responsive Enhancements */
 @media (max-width: 768px) {
     .hero-section h1 {
         font-size: 2.5rem;
@@ -517,7 +504,6 @@ footer .social-icons a:hover {
     }
 }
 
-/* Enhanced Navigation Icons */
 .navbar-nav .nav-link i {
     margin-right: 5px;
     transition: transform 0.3s ease;
@@ -531,7 +517,6 @@ footer .social-icons a:hover {
     color: white;
 }
 
-/* Navigation Link Hover Effect */
 .navbar-nav .nav-link {
     position: relative;
     padding: 8px 16px !important;
@@ -561,7 +546,6 @@ footer .social-icons a:hover {
     background: white;
 }
 
-/* Mobile Navigation Enhancement */
 @media (max-width: 768px) {
     .navbar-nav .nav-link {
         padding: 12px 20px !important;
@@ -589,7 +573,6 @@ footer .social-icons a:hover {
     color: green !important;
 }
 
-/* Hero Section */
 .hero-section {
     background: linear-gradient(to right, #6a11cb, #2575fc);
     color: white;
@@ -612,7 +595,6 @@ footer .social-icons a:hover {
     background-color: darkgreen !important;
 }
 
-/* Cards Section */
 .card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -625,7 +607,6 @@ footer .social-icons a:hover {
     font-weight: bold;
 }
 
-/* Footer */
 footer {
     background-color: #000;
     color: #fff;
@@ -642,7 +623,6 @@ footer .social-icons a:hover {
     color: green;
 }
 
-/* Rotating Logo Animation */
 .rotating-logo {
     animation: rotate 5s linear infinite;
 }
@@ -659,7 +639,6 @@ body {
     padding: 0;
 }
 
-/* Navigation Styles */
 .navbar {
     padding: 15px 0;
     transition: all 0.3s ease;
@@ -715,7 +694,6 @@ body {
     }
 }
 
-/* Introduction Section Styles */
 .intro-section {
     background: rgba(255, 255, 255, 0.95);
     padding: 40px;
@@ -801,55 +779,55 @@ footer {
 }
 .card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    max-width: 280px; /* Slightly larger width for better proportions */
-    margin: 0 auto; /* Center the cards horizontally */
-    border: none; /* Remove default border */
-    border-radius: 15px; /* Add rounded corners */
-    overflow: hidden; /* Ensure content stays within rounded corners */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
-    background: rgba(255, 255, 255, 0.95); /* Slightly transparent white background */
-    backdrop-filter: blur(10px); /* Blur effect for glass-like appearance */
+    max-width: 280px; 
+    margin: 0 auto; 
+    border: none; 
+    border-radius: 15px; 
+    overflow: hidden; 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
+    background: rgba(255, 255, 255, 0.95); 
+    backdrop-filter: blur(10px); 
 }
 .card:hover {
-    transform: translateY(-10px); /* Lift the card slightly on hover */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+    transform: translateY(-10px); 
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); 
 }
 .card img {
-    height: 150px; /* Adjusted height for better proportions */
-    object-fit: cover; /* Ensure the images fit within the specified height */
-    border-top-left-radius: 15px; /* Match the card's rounded corners */
-    border-top-right-radius: 15px; /* Match the card's rounded corners */
+    height: 150px; 
+    object-fit: cover; 
+    border-top-left-radius: 15px; 
+    border-top-right-radius: 15px;
 }
 .card-body {
-    padding: 20px; /* Add consistent padding inside the card */
-    background-color: #fff; /* White background for content */
-    border-bottom-left-radius: 15px; /* Match the card's rounded corners */
-    border-bottom-right-radius: 15px; /* Match the card's rounded corners */
+    padding: 20px;
+    background-color: #fff; 
+    border-bottom-left-radius: 15px; 
+    border-bottom-right-radius: 15px; 
 }
 .card-title {
-    font-size: 1.25rem; /* Slightly larger title font */
-    font-weight: bold; /* Make the title stand out */
-    color: #333; /* Darker color for better readability */
+    font-size: 1.25rem; 
+    font-weight: bold; 
+    color: #333; 
 }
 .card-text {
-    font-size: 0.95rem; /* Adjust font size for better readability */
-    color: #555; /* Subtle text color */
+    font-size: 0.95rem; 
+    color: #555; 
 }
 .btn-success {
-    background-color: #28a745; /* Consistent green color */
-    border: none; /* Remove button border */
-    border-radius: 20px; /* Rounded button */
-    padding: 8px 20px; /* Add padding for a modern look */
+    background-color: #28a745; 
+    border: none; 
+    border-radius: 20px;
+    padding: 8px 20px; 
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 .btn-success:hover {
-    background-color: #218838; /* Darker green on hover */
-    transform: scale(1.05); /* Slightly enlarge button on hover */
+    background-color: #218838; 
+    transform: scale(1.05);
 }
 .collapse {
-    background-color: #f9f9f9; /* Light background for expanded content */
-    padding: 10px; /* Add padding for better spacing */
-    border-radius: 10px; /* Rounded corners for expanded content */
+    background-color: #f9f9f9; 
+    padding: 10px; 
+    border-radius: 10px;
 }
 .content-wrapper {
             flex: 1 0 auto;

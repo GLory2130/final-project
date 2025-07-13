@@ -8,16 +8,19 @@ import os
 import logging
 import uuid
 from .services import get_session_history, get_chat_model, get_chat_prompt, load_knowledge_base_content
+from datetime import date, timedelta
+from myapp.models import Meal
+from myapp.views import extract_and_save_meal_from_message
 
 from langchain_core.runnables import (
     ConfigurableFieldSpec,
     RunnablePassthrough,
 )
 from langchain_core.runnables.history import RunnableWithMessageHistory
-# Set up logging
+
 logger = logging.getLogger(__name__)
 
-# Create your views here.
+
 
 @api_view(['GET'])
 def welcome_view(request):
@@ -31,10 +34,10 @@ def welcome_view(request):
 
 @csrf_exempt
 @api_view(['POST'])
-@permission_classes([AllowAny])  # Change to [IsAuthenticated] if you want only logged-in users to chat
+@permission_classes([AllowAny])  
 def machine_learning_view(request):
     try:
-        # Get the message from the request
+        
         message = request.data.get('message')
         logger.info(f"Received message: {message}")
         
@@ -45,30 +48,30 @@ def machine_learning_view(request):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        # Use the logged-in user's ID or username if authenticated
+        
         if request.user.is_authenticated:
-            user_id = str(request.user.id)  # or request.user.username
+            user_id = str(request.user.id)  
         else:
-            # Fallback to session ID for anonymous users
+           
             if 'session_id' not in request.session:
                 request.session['session_id'] = str(uuid.uuid4())
             user_id = request.session['session_id']
 
-        conversation_id = user_id  # You can use a different conversation_id if you want multiple threads per user
+        conversation_id = user_id  
 
-        # Configure the chatbot
+        
         config = {
             "user_id": user_id,
             "conversation_id": conversation_id,
-            "knowledge_base": ""  # You can add knowledge base content here if needed
+            "knowledge_base": ""  
         }
 
-        # Get response from chatbot
+        
         try:
             ai_response = chatbot(message, config)
             response_text = str(ai_response)
         except ValueError as ve:
-            # Handle missing environment variables
+            
             logger.error(f"Environment variable error: {str(ve)}")
             return Response(
                 {"error": "Service configuration error. Please try again later."},
@@ -95,7 +98,7 @@ def machine_learning_view(request):
 def chatbot(message: str, config: dict = None):
     """
     Process a chat message and return a response
-    
+
     Args:
         message (str): The user's message
         config (dict): Configuration containing user_id, conversation_id, and knowledge_base
@@ -109,15 +112,34 @@ def chatbot(message: str, config: dict = None):
         }
 
     try:
+        
+        user_id = config.get("user_id")
+        if user_id and message:
+            try:
+                extract_and_save_meal_from_message(user_id, message)
+            except Exception as meal_ex:
+                logger.warning(f"Meal extraction failed: {meal_ex}")
+
+        
+        today = date.today()
+        start_of_week = today - timedelta(days=today.weekday())
+        meals_this_week = Meal.objects.filter(
+            user_id=user_id,
+            date__gte=start_of_week,
+            date__lte=today
+        )
+        meal_summary = "\n".join(
+            [f"{meal.date} {meal.meal_type}: {meal.foods}" for meal in meals_this_week]
+        )
+
         model = get_chat_model()
         document_path = os.path.join(os.path.dirname(__file__), "..", "generate_rag", "data")
-        # Load the knowledge base content first
         knowledge_base_content = load_knowledge_base_content(document_path)
-        # Then pass it to get_chat_prompt
-        prompt = get_chat_prompt(knowledge_base_content)
-        
-        chain = prompt | model 
-        
+
+        prompt = get_chat_prompt(knowledge_base_content, meal_history=meal_summary)
+
+        chain = prompt | model
+
         chain_with_history = RunnableWithMessageHistory(
             chain,
             get_session_history,
@@ -150,16 +172,16 @@ def chatbot(message: str, config: dict = None):
             },
             config={
                 "configurable": {
-                    "user_id": config.get("user_id"),
+                    "user_id": user_id,
                     "conversation_id": config.get("conversation_id"),
                 }
             },
         )
 
-        # Extract and return only the response text
         response_text = str(AI_RESPONSE.content)
         logging.debug(f"AI_RESPONSE: {response_text}")
-        return response_text
+
+        return response_text + "\n\n" + meal_summary
 
     except Exception as e:
         logging.error(f"Error in chatbot: {str(e)}")

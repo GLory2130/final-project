@@ -26,7 +26,7 @@ class InMemoryHistory(BaseChatMessageHistory, BaseModel):
     def clear(self) -> None:
         self.messages = []
 
-# Store for chat history
+
 store = {}
 
 def get_session_history(user_id: str, conversation_id: str) -> BaseChatMessageHistory:
@@ -34,7 +34,7 @@ def get_session_history(user_id: str, conversation_id: str) -> BaseChatMessageHi
         store[(user_id, conversation_id)] = InMemoryHistory()
     return store[(user_id, conversation_id)]
 
-# Load environment variables
+
 dotenv.load_dotenv()
 
 def get_chat_model():
@@ -58,12 +58,12 @@ def load_knowledge_base_content(document_path: str, max_chars=2000) -> str:
         content_pieces = []
         total_chars = 0
         
-        # Walk through the document directory
+        
         for root, _, files in os.walk(document_path):
             for file in files:
                 file_path = os.path.join(root, file)
                 if file.endswith('.pdf'):
-                    # Handle PDF files
+                    
                     with open(file_path, 'rb') as f:
                         reader = PyPDF2.PdfReader(f)
                         text = ""
@@ -89,7 +89,7 @@ def load_knowledge_base_content(document_path: str, max_chars=2000) -> str:
         logging.error(f"Error loading knowledge base: {str(e)}")
         return ""
 
-def get_chat_prompt(knowledge_base_content: str, username: str = None):
+def get_chat_prompt(knowledge_base_content: str, username: str = None,meal_history=None):
     system_messages = [
         (
             "system",
@@ -124,6 +124,9 @@ def get_chat_prompt(knowledge_base_content: str, username: str = None):
             f"Use this knowledge base to guide your answers: {knowledge_base_content}"
         ),
     ]
+    if meal_history:
+        prompt += f"\nUser's meal history for this week:\n{meal_history}\n"
+        prompt += "Use this information to personalize your suggestions.\n"
     if username:
         system_messages.append(
             ("system", f"The current user's username is: {username}")

@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import meal_history_view
 from django.urls import path, re_path
 from django.contrib.auth.views import LogoutView as user_logout
 
@@ -12,4 +13,5 @@ urlpatterns = [
     path('logout/', views.logout_confirm, name='logout'),
     path('chat/', views.chatbot_view, name='chat'),
     re_path(r'^search_food/$', views.search_food, name='search_food_query'),
+    path('meal-history/', meal_history_view, name='meal_history'),
 ]

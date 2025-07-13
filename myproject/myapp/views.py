@@ -9,6 +9,9 @@ from django.contrib.auth.models import User
 import openai
 from .models import Food
 import re
+from django.contrib.auth.decorators import login_required
+from datetime import date, timedelta
+from myapp.models import Meal
 
 
 
@@ -129,3 +132,36 @@ def logout_confirm(request):
         logout(request)
         return redirect('login')
     return render(request, 'logout.html')
+
+@login_required
+def meal_history_view(request):
+    today = date.today()
+    start_of_week = today - timedelta(days=today.weekday())
+    meals = Meal.objects.filter(user=request.user, date__gte=start_of_week, date__lte=today).order_by('date', 'meal_type')
+    return render(request, 'meal_history.html', {'meals': meals})
+
+def extract_and_save_meal_from_message(user, message):
+    
+    meal_types = ['breakfast', 'lunch', 'dinner', 'snack']
+    foods = list(Food.objects.values_list('name', flat=True))
+
+   
+    msg = message.lower()
+
+  
+    meal_type = next((mt for mt in meal_types if mt in msg), None)
+    if not meal_type:
+        return  
+
+    
+    found_foods = [food for food in foods if food.lower() in msg]
+    if not found_foods:
+        return  
+
+    
+    Meal.objects.create(
+        user=user,
+        date=date.today(),
+        meal_type=meal_type,
+        foods=', '.join(found_foods)  
+    )
